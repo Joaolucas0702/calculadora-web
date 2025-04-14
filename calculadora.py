@@ -1,65 +1,81 @@
-class CalculadoraDespesasImoveis:
-    def __init__(self):
-        self.tabela_registros = []  # Placeholder para tabela futura, se necessário
+tabela_registro = [
+    (0, 73.22),
+    (625.89, 111),
+    (1251.79, 141.69),
+    (2503.58, 205.48),
+    (5007.15, 403.86),
+    (10014.3, 432.19),
+    (15021.47, 550.29),
+    (25035.77, 696.73),
+    (37553.65, 923.45),
+    (50071.55, 1098.21),
+    (62589.43, 1539.87),
+    (100143.09, 2314.53),
+    (150214.64, 3117.53),
+    (250357.73, 4092.94),
+    (375536.58, 4822.74),
+    (500715.44, 5788.70),
+    (751073.17, 6936.52),
+    (1126609.75, 8065.44),
+    (1502146.34, 8610.85)
+]
 
-    def calcular_goiania_trindade_canedo(self, valor_imovel, valor_financiado, tipo_financiamento, cidade, seguro, primeiro_imovel=True):
-        """Calcula despesas para Goiânia, Trindade ou Senador Canedo
-        Args:
-            seguro: Valor do seguro (deve ser verificado na simulação)
-        """
-        entrada = valor_imovel - valor_financiado
+def calcular_itbi(cidade, valor_imovel, valor_financiado, renda_bruta=None, taxa_expediente_padrao=100):
+    entrada = valor_imovel - valor_financiado
 
-        # Lavratura do contrato
-        if tipo_financiamento == "SBPE":
-            lavratura = (valor_financiado * 0.01) + 842
+    if cidade == "Aparecida de Goiânia":
+        taxa_expediente = 30
+        itbi_entrada = entrada * 0.025
+
+        if renda_bruta is None:
+            raise ValueError("Renda bruta é obrigatória para Aparecida de Goiânia.")
+
+        if renda_bruta <= 4400:
+            itbi_financiado = valor_financiado * 0.005
+        elif renda_bruta <= 8000:
+            itbi_financiado = valor_financiado * 0.01
         else:
-            lavratura = (valor_financiado * 0.01) + (valor_financiado * 0.015)
+            itbi_financiado = valor_financiado * 0.015
 
-        # ITBI
-        itbi = valor_imovel * 0.005  # 0,5% exemplo
-        itbi_total = itbi if primeiro_imovel else valor_imovel * 0.01
+        itbi = itbi_entrada + itbi_financiado
 
-        # Registro (valor fixo de exemplo)
-        total_registros = 3000.0
+    elif cidade == "Senador Canedo":
+        itbi = entrada * 0.015 + valor_financiado * 0.005
+        taxa_expediente = taxa_expediente_padrao
 
-        total_despesas = itbi_total + lavratura + total_registros + seguro
+    elif cidade in ["Goiânia", "Trindade"]:
+        itbi = valor_imovel * 0.02
+        taxa_expediente = taxa_expediente_padrao
 
-        return {
-            "Entrada": entrada,
-            "ITBI": itbi_total,
-            "Lavratura": lavratura,
-            "Registro": total_registros,
-            "Seguro (conferir na simulação)": seguro,
-            "Total Despesas": total_despesas
-        }
+    else:
+        itbi = 0
+        taxa_expediente = 0
 
-    def calcular_aparecida(self, valor_imovel, valor_financiado, tipo_financiamento, renda_bruta, seguro, primeiro_imovel=True):
-        """Calcula despesas para Aparecida de Goiânia
-        Args:
-            seguro: Valor do seguro (deve ser verificado na simulação)
-        """
-        entrada = valor_imovel - valor_financiado
+    return itbi + taxa_expediente
 
-        # Lavratura
-        if tipo_financiamento == "SBPE":
-            lavratura = (valor_financiado * 0.01) + 842
-        else:
-            lavratura = (valor_financiado * 0.01) + (valor_financiado * 0.015)
+def calcular_registro_cartorio(valor_imovel, valor_financiado, primeiro_imovel=False):
+    def buscar_valor_registro(valor_base):
+        for faixa_max, custo in tabela_registro:
+            if valor_base <= faixa_max:
+                return custo
+        return tabela_registro[-1][1]
 
-        # ITBI
-        itbi = valor_imovel * 0.005
-        itbi_total = itbi if primeiro_imovel else valor_imovel * 0.01
+    registro_imovel = buscar_valor_registro(valor_imovel)
+    registro_financiamento = buscar_valor_registro(valor_financiado)
+    total = registro_imovel + registro_financiamento
 
-        # Registro
-        total_registros = 2800.0
+    if primeiro_imovel:
+        total *= 0.5
 
-        total_despesas = itbi_total + lavratura + total_registros + seguro
+    return total
 
-        return {
-            "Entrada": entrada,
-            "ITBI": itbi_total,
-            "Lavratura": lavratura,
-            "Registro": total_registros,
-            "Seguro (conferir na simulação)": seguro,
-            "Total Despesas": total_despesas
-        }
+def calcular_lavratura_contrato(tipo_financiamento, valor_financiado):
+    if tipo_financiamento == "Minha Casa Minha Vida" or tipo_financiamento == "Pro Cotista":
+        return valor_financiado * 0.01 + valor_financiado * 0.015
+    elif tipo_financiamento == "SBPE":
+        return valor_financiado * 0.01 + 842
+    else:
+        return 0
+
+def calcular_seguro():
+    return "Consultar valor exato do seguro na simulação bancária."
