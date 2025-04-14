@@ -1,5 +1,6 @@
 import streamlit as st
 from calculadora import CalculadoraDespesasImoveis
+import pandas as pd
 
 def main():
     st.set_page_config(page_title="Calculadora de Despesas de Imóveis", layout="centered")
@@ -32,8 +33,29 @@ def main():
                 resultados = st.session_state.calculadora.calcular_goiania_trindade_canedo(
                     valor_imovel, valor_financiado, tipo_financiamento, cidade, seguro, primeiro_imovel
                 )
-                st.success("Cálculo realizado com sucesso!")
-                st.write(resultados)
+
+                st.subheader("📋 Resultado do Cálculo")
+
+                tabela = pd.DataFrame({
+                    "Descrição": [
+                        "Valor de Entrada",
+                        "Lavratura do Contrato",
+                        "Registro",
+                        "ITBI",
+                        "Seguro (verificar na simulação)"
+                    ],
+                    "Valor (R$)": [
+                        resultados["Entrada"],
+                        resultados["Lavratura"],
+                        resultados["Registro"],
+                        resultados["ITBI"],
+                        resultados["Seguro (conferir na simulação)"]
+                    ]
+                })
+
+                st.table(tabela)
+                st.success(f"**Total Estimado de Despesas: R$ {resultados['Total Despesas']:.2f}**")
+
             except Exception as e:
                 st.error(f"Erro no cálculo: {e}")
 
@@ -56,8 +78,29 @@ def main():
                 resultados = st.session_state.calculadora.calcular_aparecida(
                     valor_imovel, valor_financiado, tipo_financiamento, renda_bruta, seguro, primeiro_imovel
                 )
-                st.success("Cálculo realizado com sucesso!")
-                st.write(resultados)
+
+                st.subheader("📋 Resultado do Cálculo")
+
+                tabela = pd.DataFrame({
+                    "Descrição": [
+                        "Valor de Entrada",
+                        "Lavratura do Contrato",
+                        "Registro",
+                        "ITBI",
+                        "Seguro (verificar na simulação)"
+                    ],
+                    "Valor (R$)": [
+                        resultados["Entrada"],
+                        resultados["Lavratura"],
+                        resultados["Registro"],
+                        resultados["ITBI"],
+                        resultados["Seguro (conferir na simulação)"]
+                    ]
+                })
+
+                st.table(tabela)
+                st.success(f"**Total Estimado de Despesas: R$ {resultados['Total Despesas']:.2f}**")
+
             except Exception as e:
                 st.error(f"Erro no cálculo: {e}")
 
