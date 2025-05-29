@@ -45,12 +45,15 @@ def main():
 #### 💼 *Despesas Relacionadas à Compra do Imóvel*
 
 1️⃣ **Caixa Econômica Federal – R$ {resultados['Lavratura']:,.2f}**  
+
 Esse valor corresponde à lavratura do contrato de financiamento/escritura, avaliação do imóvel e relacionamento.
 
 2️⃣ **ITBI – Prefeitura – R$ {resultados['ITBI']:,.2f}**  
+
 O Imposto sobre Transmissão de Bens Imóveis (ITBI) pode ser cobrado separadamente sobre o valor do imóvel e sobre o valor financiado, dependendo da legislação municipal.
 
 3️⃣ **Cartório de Registro de Imóveis – R$ {resultados['Registro']:,.2f}**  
+
 Esse valor refere-se ao registro do contrato de financiamento, obrigatório para garantir a legalidade da compra e a segurança jurídica do comprador.
 
 💼 **Seguro (verificar na simulação):** R$ {resultados['Seguro (conferir na simulação)']:,.2f}
@@ -58,11 +61,13 @@ Esse valor refere-se ao registro do contrato de financiamento, obrigatório para
 ---
 
 #### ✅ *Total Geral das Despesas*
+
 💰 **Aproximadamente R$ {resultados['Total Despesas']:,.2f}**
 
 ---
 
 ⚠️ *Aviso Importante:*  
+
 A Suporte Soluções Imobiliárias não é responsável pelo cálculo oficial das despesas relacionadas à compra do imóvel. O presente levantamento tem caráter informativo e visa apenas auxiliar o cliente a entender os custos envolvidos na aquisição, com base em valores estimados.
 
 Para obter informações precisas e realizar os pagamentos, recomenda-se entrar em contato com os órgãos responsáveis, como Prefeitura e o Cartório de Registro de Imóveis.
@@ -103,35 +108,41 @@ Para obter informações precisas e realizar os pagamentos, recomenda-se entrar 
                 )
 
                 texto_resultado = f"""
-### 🏠 *CÁLCULO PARA COMPRA DE IMÓVEL COM FINANCIAMENTO*
+ 🏠 *CÁLCULO PARA COMPRA DE IMÓVEL COM FINANCIAMENTO*
 
-#### 📄 *Dados do Imóvel e Financiamento*
-- **Valor de Compra e Venda:** R$ {valor_imovel:,.2f}
-- **Valor Financiado:** R$ {valor_financiado:,.2f}
-- **Valor de Entrada:** R$ {resultados['Entrada']:,.2f}
-- **Tipo de Financiamento:** {tipo_financiamento}
+ 📄 *Dados do Imóvel e Financiamento*
 
-#### 💼 *Despesas Relacionadas à Compra do Imóvel*
+- *Valor de Compra e Venda:* R$ {valor_imovel:,.2f}
+- *Valor Financiado:*R$ {valor_financiado:,.2f}
+- *Valor de Entrada:* R$ {resultados['Entrada']:,.2f}
+- *Tipo de Financiamento:* {tipo_financiamento}
 
-1️⃣ **Caixa Econômica Federal – R$ {resultados['Lavratura']:,.2f}**  
+ 💼 *Despesas Relacionadas à Compra do Imóvel*
+
+1️⃣ *Caixa Econômica Federal – R$ {resultados['Lavratura']:,.2f}*  
+
 Esse valor corresponde à lavratura do contrato de financiamento/escritura, avaliação do imóvel e relacionamento.
 
-2️⃣ **ITBI – Prefeitura – R$ {resultados['ITBI']:,.2f}**  
+2️⃣ *ITBI – Prefeitura – R$ {resultados['ITBI']:,.2f}* 
+
 O Imposto sobre Transmissão de Bens Imóveis (ITBI) pode ser cobrado separadamente sobre o valor do imóvel e sobre o valor financiado, dependendo da legislação municipal.
 
-3️⃣ **Cartório de Registro de Imóveis – R$ {resultados['Registro']:,.2f}**  
+3️⃣ *Cartório de Registro de Imóveis – R$ {resultados['Registro']:,.2f}*  
+
 Esse valor refere-se ao registro do contrato de financiamento, obrigatório para garantir a legalidade da compra e a segurança jurídica do comprador.
 
-💼 **Seguro (verificar na simulação):** R$ {resultados['Seguro (conferir na simulação)']:,.2f}
+💼 *Seguro (verificar na simulação):* R$ {resultados['Seguro (conferir na simulação)']:,.2f}
 
 ---
 
-#### ✅ *Total Geral das Despesas*
-💰 **Aproximadamente R$ {resultados['Total Despesas']:,.2f}**
+✅ *Total Geral das Despesas*
+
+💰 *Aproximadamente R$ {resultados['Total Despesas']:,.2f}*
 
 ---
 
 ⚠️ *Aviso Importante:*  
+
 A Suporte Soluções Imobiliárias não é responsável pelo cálculo oficial das despesas relacionadas à compra do imóvel. O presente levantamento tem caráter informativo e visa apenas auxiliar o cliente a entender os custos envolvidos na aquisição, com base em valores estimados.
 
 Para obter informações precisas e realizar os pagamentos, recomenda-se entrar em contato com os órgãos responsáveis, como Prefeitura e o Cartório de Registro de Imóveis.
